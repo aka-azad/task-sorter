@@ -22,7 +22,7 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed top-5 right-4 z-50">
       <label className="grid cursor-pointer place-items-center">
         <input
           type="checkbox"

@@ -1,8 +1,8 @@
 import { FaGoogle } from "react-icons/fa";
-import AuthContext from "./Context/AuthContext";
+import AuthContext from "../Context/AuthContext";
 import { useContext } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useAxiosPublic from "./Hooks/useAxiosPublic";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
@@ -11,7 +11,7 @@ const LoginPage = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const setRoute = "/home"; 
+  const setRoute = "/home";
 
   const saveUserMutation = useMutation({
     mutationFn: (user) => axiosPublic.post("/users", user),
@@ -28,20 +28,21 @@ const LoginPage = () => {
 
   function handleGoogleLogin() {
     loginWithGoogle()
-    .then((res) => {
-      const { displayName, photoURL, email } = res.user;
+      .then((res) => {
+        const { displayName, photoURL, email, uid } = res.user;
 
-      const userInfo = {
-        displayName,
-        photoURL,
-        email,
-        lastSignIn: new Date().toISOString(),
-      };
-      saveUserMutation.mutate(userInfo);
-    })
-    .catch((error) => {
-      toast.error("Error signing in with Google: " + error.message);
-    });;
+        const userInfo = {
+          displayName,
+          photoURL,
+          email,
+          userId: uid,
+          lastSignIn: new Date().toISOString(),
+        };
+        saveUserMutation.mutate(userInfo);
+      })
+      .catch((error) => {
+        toast.error("Error signing in with Google: " + error.message);
+      });
   }
 
   return (
