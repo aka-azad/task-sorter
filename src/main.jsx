@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import LoginPage from "./Pages/LoginPage.jsx";
-import ThemeToggle from "./Components/ThemeToggle.jsx";
 import { AuthProvider } from "./Context/AuthProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
@@ -43,7 +42,7 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
-        <ThemeToggle />
+       
         <ToastContainer />
       </AuthProvider>
     </QueryClientProvider>
