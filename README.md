@@ -59,8 +59,8 @@ This is the frontend for a Task Management Application built with Vite.js and Re
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/task-management-client.git
-   cd task-management-client
+   git clone https://github.com/aka-azad/task-sorter.git
+   cd task-sorter
    ```
 2. Install dependencies:
    ```sh
