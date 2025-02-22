@@ -68,9 +68,12 @@ This is the frontend for a Task Management Application built with Vite.js and Re
    ```
 3. Create a `.env` file in the root directory and add your Firebase configuration:
    ```env
-   VITE_FIREBASE_API_KEY=your_api_key
-   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_API_KEY=your_api_key_from_firebase
+   VITE_AUTH_DOMAIN=your_auth_domain_from_firebase
+   VITE_PROJECT_ID=your_project_id_from_firebase
+   VITE_STORAGE_BUCKET=your_storage_bucket_from_firebase
+   VITE_MESSAGING_SENDER_ID=your_messaging_sender_id_from_firebase
+   VITE_APP_ID=your_app_id_from_firebase
    ```
 4. Start the development server:
    ```sh
