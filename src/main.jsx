@@ -19,13 +19,7 @@ const router = new createBrowserRouter([
         path: "/",
         element: <TaskBoard />,
       },
-      {
-        path: "todays-task",
-        element: <h1>Today&apos;s Task</h1>,
-      },
 
-      { path: "future-task", element: <h1>Future Task</h1> },
-      { path: "older-task", element: <h1>Older Task</h1> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
@@ -33,7 +27,6 @@ const router = new createBrowserRouter([
     path: "login",
     element: <LoginPage />,
   },
-  { path: "*", element: <NotFoundPage /> },
 ]);
 const queryClient = new QueryClient();
 
@@ -42,7 +35,7 @@ createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
-       
+
         <ToastContainer />
       </AuthProvider>
     </QueryClientProvider>

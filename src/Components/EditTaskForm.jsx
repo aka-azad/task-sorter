@@ -3,23 +3,24 @@ import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import AuthContext from "../Context/AuthContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const EditTaskForm = ({ onClose, task }) => {
   const { currentUser } = useContext(AuthContext);
   const queryClient = useQueryClient();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [taskData, setTaskData] = useState({
     title: task.title,
     _id: task._id,
     description: task.description,
     category: task.category,
+    dueDate: task.dueDate || "",
   });
   const userId = currentUser.uid;
 
   const updateTaskMutation = useMutation({
     mutationFn: async (updatedTask) => {
-      await axiosPublic.put(`/edit-task/${updatedTask._id}`, updatedTask);
+      await axiosSecure.put(`/edit-task/${updatedTask._id}`, updatedTask);
     },
     onMutate: async (updatedTask) => {
       await queryClient.cancelQueries(["tasks", userId]);
@@ -52,6 +53,7 @@ const EditTaskForm = ({ onClose, task }) => {
       queryClient.invalidateQueries(["tasks", userId]);
     },
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTaskData((prev) => ({ ...prev, [name]: value }));
@@ -81,10 +83,10 @@ const EditTaskForm = ({ onClose, task }) => {
           name="title"
           value={taskData.title}
           onChange={handleChange}
-          placeholder="Task title (Max 50 characters) - Required"
+          placeholder="Task title (Max 50 characters)"
           maxLength={50}
           required
-          className="w-full p-2 border rounded mb-2 "
+          className="w-full p-2 border rounded mb-2"
         />
         <textarea
           name="description"
@@ -94,6 +96,9 @@ const EditTaskForm = ({ onClose, task }) => {
           maxLength={200}
           className="w-full p-2 border rounded mb-2"
         />
+        <label htmlFor="category" className="block text-sm mb-2">
+          Category
+        </label>
         <select
           name="category"
           value={taskData.category}
@@ -104,6 +109,16 @@ const EditTaskForm = ({ onClose, task }) => {
           <option value="In Progress">In Progress</option>
           <option value="Done">Done</option>
         </select>
+        <label htmlFor="dueDate" className="block text-sm mb-2">
+          Due Date
+        </label>
+        <input
+          type="date"
+          name="dueDate"
+          defaultValue={taskData.dueDate}
+          onChange={handleChange}
+          className="w-full p-2 border rounded mb-2"
+        />
         <div className="flex justify-end space-x-2">
           <button type="button" onClick={onClose} className="btn btn-secondary">
             Cancel

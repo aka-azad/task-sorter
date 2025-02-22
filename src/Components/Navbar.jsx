@@ -12,20 +12,12 @@ const Navbar = () => {
             <NavLink to="/">Overview</NavLink>
           </li>
     
-          <li>
-            <NavLink to="/todays-task">Today</NavLink>
-          </li>
-          <li>
-            <NavLink to="/future-task">Upcoming</NavLink>
-          </li>
-          <li>
-            <NavLink to="/older-task">Older</NavLink>
-          </li>
+          
         </>
       );
   return (
     <nav>
-      <div className="navbar ">
+      <div className="navbar container mx-auto">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">Task Sorter</a>
         </div>

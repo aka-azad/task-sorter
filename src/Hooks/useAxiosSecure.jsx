@@ -4,8 +4,8 @@ import AuthContext from "../Context/AuthContext";
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
-  // baseURL: "https://skillspace-server.vercel.app",
+  // baseURL: "http://localhost:3000",
+  baseURL: "https://task-sorter-api.onrender.com",
 });
 
 const useAxiosSecure = () => {

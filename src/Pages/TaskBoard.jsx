@@ -23,7 +23,7 @@ const TaskBoard = () => {
 
       {/* Modal for Add Task Form */}
       {isFormOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur flex justify-center items-center">
           <div className="bg-white bg-opacity-40 backdrop-blur-xl p-6 rounded-lg shadow-xl max-w-screen-sm mx-auto text-black shadow-white">
             <AddTaskForm onClose={() => setIsFormOpen(false)} />
           </div>

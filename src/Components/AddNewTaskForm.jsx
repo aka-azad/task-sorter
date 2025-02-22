@@ -1,25 +1,26 @@
 import { useContext, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import AuthContext from "../Context/AuthContext";
 import useWebSocket from "../Hooks/useWebSocket";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const AddTaskForm = ({ onClose }) => {
   useWebSocket();
   const { currentUser } = useContext(AuthContext);
-  const axiosPublic = useAxiosPublic(); // make it secure
+  const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
   const [taskData, setTaskData] = useState({
     title: "",
     description: "",
     category: "To-Do",
+    dueDate: "",
   });
 
   const addTaskMutation = useMutation({
     mutationFn: async (newTask) => {
-      return axiosPublic.post("/tasks", newTask);
+      return axiosSecure.post("/tasks", newTask);
     },
     onSuccess: () => {
       toast.success("Task added successfully!");
@@ -59,10 +60,10 @@ const AddTaskForm = ({ onClose }) => {
           name="title"
           value={taskData.title}
           onChange={handleChange}
-          placeholder="Task title (Max 50 characters) - Required"
+          placeholder="Task title (Max 50 characters)"
           maxLength={50}
           required
-          className="w-full p-2 border rounded mb-2 "
+          className="w-full p-2 border rounded mb-2"
         />
         <textarea
           name="description"
@@ -72,6 +73,10 @@ const AddTaskForm = ({ onClose }) => {
           maxLength={200}
           className="w-full p-2 border rounded mb-2"
         />
+
+        <label htmlFor="category" className="block text-sm mb-2">
+          Category
+        </label>
         <select
           name="category"
           value={taskData.category}
@@ -82,6 +87,16 @@ const AddTaskForm = ({ onClose }) => {
           <option value="In Progress">In Progress</option>
           <option value="Done">Done</option>
         </select>
+        <label htmlFor="dueDate" className="block text-sm mb-2">
+          Due Date
+        </label>
+        <input
+          type="date"
+          name="dueDate"
+          value={taskData.dueDate}
+          onChange={handleChange}
+          className="w-full p-2 border rounded mb-2"
+        />
         <div className="flex justify-end space-x-2">
           <button type="button" onClick={onClose} className="btn btn-secondary">
             Cancel

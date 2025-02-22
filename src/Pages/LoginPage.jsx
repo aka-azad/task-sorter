@@ -4,14 +4,14 @@ import { useContext } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 
 const LoginPage = () => {
-  const { loginWithGoogle } = useContext(AuthContext);
+  const { loginWithGoogle, currentUser } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const setRoute = "/home";
+  const setRoute = "/";
 
   const saveUserMutation = useMutation({
     mutationFn: (user) => axiosPublic.post("/users", user),
@@ -25,6 +25,10 @@ const LoginPage = () => {
       console.error("Error saving sign-in info: ", error);
     },
   });
+
+  if (currentUser) {
+    return <Navigate to="/" />;
+  }
 
   function handleGoogleLogin() {
     loginWithGoogle()
@@ -46,17 +50,19 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-base-200">
-      <div className="card w-96 bg-base-100 shadow-xl p-6">
-        <h2 className="text-2xl font-bold text-center mb-4">
-          Login with Google
-        </h2>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-primary to-accent p-4">
+      <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-sm w-full text-center">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">Welcome!</h2>
+        <p className="text-gray-600 mb-6">
+          Sign in or Signup with Google to continue.
+        </p>
 
         <button
           onClick={handleGoogleLogin}
-          className="btn btn-circle mx-auto btn-primary"
+          className="flex items-center justify-center w-full py-3 px-4 rounded-lg bg-red-500 text-white font-semibold text-lg hover:bg-red-600 transition-all duration-300 shadow-lg"
         >
-          <FaGoogle />
+          <FaGoogle className="mr-3 text-xl" />
+          Sign in with Google
         </button>
       </div>
     </div>
