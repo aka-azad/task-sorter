@@ -15,7 +15,6 @@ This is the frontend for a Task Management Application built with Vite.js and Re
 - **State Management:** React Query
 - **Drag-and-Drop:** @hello-pangea/dnd
 - **Notifications:** React Toastify, SweetAlert2
-- **SEO:** React Helmet Async
 
 ## Dependencies
 
@@ -31,7 +30,6 @@ This is the frontend for a Task Management Application built with Vite.js and Re
   "react": "^18.3.1",
   "react-awesome-reveal": "^4.3.1",
   "react-dom": "^18.3.1",
-  "react-helmet-async": "^2.0.5",
   "react-hook-form": "^7.54.2",
   "react-icons": "^5.4.0",
   "react-router": "^7.1.1",
@@ -86,7 +84,3 @@ This is the frontend for a Task Management Application built with Vite.js and Re
 - **Drag-and-Drop:** Move tasks between categories.
 - **Real-time Updates:** Sync changes instantly with the backend.
 - **Responsive Design:** Works on both desktop and mobile.
-
-```
-```
-
